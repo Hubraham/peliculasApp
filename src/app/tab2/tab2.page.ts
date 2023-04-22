@@ -2,9 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 import { CommonModule } from '@angular/common';
-import { register } from 'swiper/element/bundle';
-
-register();
+import { MoviesService } from '../service/movies.service';
 
 @Component({
   selector: 'app-tab2',
@@ -16,16 +14,19 @@ register();
 })
 export class Tab2Page {
 
-  slideOpts: any = '';
+  textoBuscar = '';
+  ideas: string[] = ['Spiderman', 'Avengers', 'Señor de los anillos', 'La vida es bella']
 
-  constructor() {
-    this.slideOpts = {
-      slidesPerView:3.1,
-      freemode:"true",
-      spaceBetween:-10,
-      direction: "horizontal"
+  constructor( private movieS: MoviesService){}
+
+  buscar( event: any ){
+    
+    const valor = event.detail.value;
+    console.log(valor);
+    // this.movieS.BuscarPeliculas( valor )
+    //   .subscribe( resp =>{
+    //     console.log(resp)
+    //   });
   }
 
-  
-}
 }

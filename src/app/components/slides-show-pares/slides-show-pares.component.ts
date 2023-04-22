@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit, CUSTOM_ELEMENTS_SCHEMA, Output, EventEmitter, } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, ModalController } from '@ionic/angular';
 import { Pelicula } from 'src/app/interfaces/interfaces';
 import { PipesModule } from '../../pipes/pipes.module';
 import { register } from 'swiper/element/bundle';
+import { DetalleComponent } from '../detalle/detalle.component';
 
 register();
 
@@ -23,7 +24,7 @@ export class SlidesShowParesComponent  implements OnInit  {
   @Output() cargarMas = new EventEmitter();
   
 
-  constructor() { }
+  constructor( private modalCtrl : ModalController ) { }
 
   ngOnInit() {    
   }
@@ -32,6 +33,17 @@ export class SlidesShowParesComponent  implements OnInit  {
     this.cargarMas.emit();
   }
 
+  
+  async verDetalle( id : number ){
+    const modal = await this.modalCtrl.create({
+      component: DetalleComponent,
+      componentProps: {
+        id
+      }
+    });
+
+    modal.present();
+  }
   
 
 }

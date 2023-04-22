@@ -8,6 +8,7 @@ import { AppComponent } from './app/app.component';
 import { environment } from './environments/environment';
 
 import { HttpClientModule } from '@angular/common/http';
+import Swiper from 'swiper';
 
 
 if (environment.production) {
@@ -17,7 +18,7 @@ if (environment.production) {
 bootstrapApplication(AppComponent, {
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    importProvidersFrom(IonicModule.forRoot({}), HttpClientModule),
+    importProvidersFrom(IonicModule.forRoot({}), HttpClientModule, Swiper),
     provideRouter(routes),
   ],
   

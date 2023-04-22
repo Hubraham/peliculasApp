@@ -9,6 +9,7 @@ import { ParesPipe } from './pares.pipe';
   declarations: [
     ImagenPipe,
     ParesPipe,
+    
   ],
   exports:[
     ImagenPipe,

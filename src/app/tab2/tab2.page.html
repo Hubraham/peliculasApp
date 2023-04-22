@@ -1,6 +1,40 @@
-<swiper-container   direction="{{slideOpts.direction}}"
-                   *ngFor="let item of [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,]">
-    
-    <swiper-slide>Slide 1</swiper-slide>
-    
-  </swiper-container>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Buscar Pelicula</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-toolbar>
+  <ion-searchbar  placeholder="Buscar Pelicula"
+                  animated
+                  [debounce]="300"
+                  [value]="textoBuscar" 
+                  (ionInput)="buscar($event)" 
+                  ></ion-searchbar>
+</ion-toolbar>
+
+<ion-content>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-spinner name="crescent"></ion-spinner>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-list>    
+    <ion-list-header>
+      <ion-label>Ideas</ion-label>
+    </ion-list-header>
+
+    <ion-item button *ngFor="let idea of ideas"
+              (click)="textoBuscar = idea">
+      <ion-label color="primary"> {{ idea }}</ion-label>
+    </ion-item>
+
+  </ion-list>
+  
+</ion-content>
+
+

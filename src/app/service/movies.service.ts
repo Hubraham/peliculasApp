@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { RespuestaMDB } from '../interfaces/interfaces';
+import { PeliculaDetalle, RespuestaCredits, RespuestaMDB } from '../interfaces/interfaces';
 import { environment } from '../../environments/environment';
 
 const URL = environment.url;
@@ -27,13 +27,14 @@ export class MoviesService {
   }
 
   getPopulares(){
-
     this.popularesPage++;
-
     const query = `/discover/movie?sort_by=popularity.desc&page=${this.popularesPage}`;
-
     return this.ejecutarQuery<RespuestaMDB>(query);
 
+  }
+
+  BuscarPeliculas(texto : string){
+    return this.ejecutarQuery(`/search/movie?query=${ texto }`);
   }
 
 
@@ -61,6 +62,14 @@ export class MoviesService {
         
         
       }
+
+    getPeliculaDetalle( id: number){
+      return this.ejecutarQuery<PeliculaDetalle>(`/movie/${ id }?a=1`);
+    }
+    getActoresPeliculas( id: number){
+      return this.ejecutarQuery<RespuestaCredits>(`/movie/${ id }/credits?a=1`);
+    }
+    
       
     }
     // return  this.ejecutarQuery<RespuestaMDB>(`/discover/movie?primary_release_date.gte=2019-01-01&primary_release_date.lte=2023-01-30`)
