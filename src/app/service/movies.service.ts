@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { PeliculaDetalle, RespuestaCredits, RespuestaMDB } from '../interfaces/interfaces';
+import { Busqueda, Genre, PeliculaDetalle, RespuestaCredits, RespuestaMDB } from '../interfaces/interfaces';
 import { environment } from '../../environments/environment';
 
 const URL = environment.url;
@@ -12,7 +12,9 @@ const apiKey = environment.apikey;
 export class MoviesService {
 
   private popularesPage = 0;
+  generos: Genre[] = [];
 
+  
   constructor(private http: HttpClient) { }
 
   private ejecutarQuery<T>( query : string ) {
@@ -34,7 +36,7 @@ export class MoviesService {
   }
 
   BuscarPeliculas(texto : string){
-    return this.ejecutarQuery(`/search/movie?query=${ texto }`);
+    return this.ejecutarQuery<Busqueda>(`/search/movie?query=${ texto }`);
   }
 
 
@@ -70,7 +72,23 @@ export class MoviesService {
       return this.ejecutarQuery<RespuestaCredits>(`/movie/${ id }/credits?a=1`);
     }
     
-      
+
+    cargarGeneros(): Promise<Genre[]> {
+
+      return new Promise( resolve => {
+  
+        this.ejecutarQuery(`/genre/movie/list?a=1`)
+          .subscribe( (resp:any) => {
+            this.generos = resp['genres'];
+            console.log(this.generos);
+            resolve(this.generos);
+          });
+  
+      });
+  
+  
     }
+  
+  }
     // return  this.ejecutarQuery<RespuestaMDB>(`/discover/movie?primary_release_date.gte=2019-01-01&primary_release_date.lte=2023-01-30`)
     // return this.http.get<RespuestaMDB>(`https://api.themoviedb.org/3/discover/movie?primary_release_date.gte=2019-01-01&primary_release_date.lte=2023-01-30&api_key=0c3b93edbf0a1190420e56ac218fd1e1&language=es&include_image_language=es`)

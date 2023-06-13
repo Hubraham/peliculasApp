@@ -73,7 +73,7 @@
       <ion-card class="card-actor">
         <img *ngIf="!actor.profile_path" src="/assets/no-avatar.jpg">
         <img *ngIf="actor.profile_path" [src]="actor.profile_path | imagen">
-        <ion-label class="actor-name">{{actor.name}} </ion-label>
+        <ion-label class="actor-name">{{actor.name }} es {{ actor.character}} </ion-label>
       </ion-card>
     </swiper-slide>
   </swiper-container>
@@ -93,7 +93,7 @@
     <ion-buttons slot="end">
       <ion-button (click)="favorito()">
         <ion-label>Favorito</ion-label>
-        <ion-icon slot="end" name="star-outline"></ion-icon>
+        <ion-icon slot="end" [name]="estrella"></ion-icon>
       </ion-button>
     </ion-buttons>
   

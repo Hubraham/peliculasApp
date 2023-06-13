@@ -2,7 +2,7 @@
                   free-mode="true"
                   direction="horizontal">
 
-  <swiper-slide *ngFor="let pelicula of peliculas">
+  <swiper-slide *ngFor="let pelicula of peliculas | filtroImg">
       
     <ion-card (click)="verDetalle( pelicula.id )">
         <img [src]="pelicula.backdrop_path | imagen">

@@ -10,6 +10,8 @@ import { environment } from './environments/environment';
 import { HttpClientModule } from '@angular/common/http';
 import Swiper from 'swiper';
 
+import { IonicStorageModule } from '@ionic/storage-angular';
+
 
 if (environment.production) {
   enableProdMode();
@@ -18,7 +20,7 @@ if (environment.production) {
 bootstrapApplication(AppComponent, {
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    importProvidersFrom(IonicModule.forRoot({}), HttpClientModule, Swiper),
+    importProvidersFrom(IonicModule.forRoot({}), HttpClientModule, Swiper, IonicStorageModule.forRoot()),
     provideRouter(routes),
   ],
   

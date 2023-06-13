@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Pelicula } from 'src/app/interfaces/interfaces';
+import { Pelicula, PeliculaDetalle } from 'src/app/interfaces/interfaces';
 
 import { IonicModule, ModalController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
